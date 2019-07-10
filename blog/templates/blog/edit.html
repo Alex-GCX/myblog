@@ -13,22 +13,29 @@
     <title>新建博客</title>
     <script>
         function openDetail() {
-            window.location.href='/detail/{{article.id}}'
+            window.location.href = '/detail/{{article.id}}'
         }
     </script>
 </head>
 <body>
-<form action="/detail/{{article.id | default:'0'}}/" method="post">
-    {% csrf_token %}
-    <input type="hidden" name='article_id' value="{{article.id | default:'0'}}">
-    <label>文章标题
-        <input type="text" name="title" value="{{article.title | default:'请输入标题'}}">
-    </label>
-    <br/><br/>
-    <label>文章内容
-        <textarea name="content" rows="20" cols="150">{{article.content | default:'请输入内容'}}</textarea>
-    </label>
-    <br/><br/>
+<form action="/detail/{{ article.id | default:'0' }}/" method="post">
+    <div>
+        {% csrf_token %}
+        <input type="hidden" name='article_id' value="{{ article.id | default:'0' }}">
+        <div>
+            <label for="basic-url">文章标题</label>
+            <br/>
+            <input type="text" name="title" class="form-control" value="{{ article.title | default:'请输入标题' }}">
+        </div>
+        <br/>
+        <div>
+            <label for="basic-url">文章内容</label>
+            <br/>
+            <textarea name="content" rows="20" class="form-control"
+                      cols="150">{{ article.content | default:'请输入内容' }}</textarea>
+        </div>
+        <br/><br/>
+    </div>
     <div class="btn-toolbar">
         <button class="btn btn-default" type="submit" style="color: #337ab7">确认提交</button>
         <button class="btn btn-default" type="button" style="color: #337ab7" onclick="openDetail()">取消提交</button>
